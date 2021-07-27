@@ -1,15 +1,37 @@
-const unselectedSeat = document.querySelectorAll('.seat');
-const selectedSeat = document.querySelectorAll('.selected');
+const container = document.querySelector('.container')
+const seats = document.querySelectorAll('.row .seat:not(.occupied)');
+const count = document.getElementById('count');
+const total = document.getElementById('total');
+const movieSelect = document.getElementById('movie');
+let ticketPrice = parseInt(movieSelect.value);
+ 
+function updateSelectedCount() {
+    const selectedSeats = document.querySelectorAll('.row .seat.selected');
 
+    const seatsIndex = [...selectedSeats].map();
 
-unselectedSeat.forEach(seat => {
-    seat.addEventListener('click', () => {
-        seat.className += ' selected'
-    })
+    const selectedSeatsCount = selectedSeats.length;
+
+    count.innerText = selectedSeatsCount;
+    total.innerText = selectedSeatsCount * ticketPrice;
+}
+
+function updatePrice() {
+
+}
+
+//Movie selector event
+movieSelect.addEventListener('change', function(e) {
+    ticketPrice = parseInt(e.target.value);
+
+    updateSelectedCount();
 })
 
-selectedSeat.forEach(seat => {
-    seat.addEventListener('click', () => {
-        seat.className = 'seat'
-    })
+container.addEventListener('click', function(e) {
+    if(e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
+        e.target.classList.toggle('selected');
+        updateSelectedCount();
+    }
 })
+
+
