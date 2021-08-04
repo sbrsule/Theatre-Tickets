@@ -109,3 +109,11 @@ body {
 p.text span {
     color: #6feaf6
 }
+
+.clearButton {
+    visibility: hidden;
+}
+
+.clearButton.visible {
+    visibility: visible;
+}
